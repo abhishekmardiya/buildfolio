@@ -8,6 +8,7 @@ import {
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { siteInfo } from "@/lib/utils";
 import StatsCard from "./stats-card";
 
 const LiveBadge = () => {
@@ -56,9 +57,7 @@ export default function HeroSection() {
             Share What You&apos;ve Built, Discover What&apos;s Launching
           </h1>
           <p className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl leading-relaxed">
-            A community platform for creators to showcase their apps, AI tools,
-            SaaS products, and creative projects. Authentic launches, real
-            builders, genuine feedback.
+            {siteInfo.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 mb-16">
             <Button asChild size="lg" className="text-base px-8 shadow-lg">
