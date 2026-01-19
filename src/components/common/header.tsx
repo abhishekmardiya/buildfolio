@@ -1,10 +1,4 @@
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, SignUpButton } from "@clerk/nextjs";
 import {
   CompassIcon,
   HomeIcon,
@@ -15,6 +9,7 @@ import {
 import Link from "next/link";
 import { Suspense } from "react";
 import { Button } from "../ui/button";
+import CustomUserButton from "./custom-user-button";
 
 const Logo = () => {
   return (
@@ -55,7 +50,12 @@ export default function Header() {
           <div className="flex items-center gap-3">
             <Suspense fallback={<UserIcon className="size-6" />}>
               <SignedOut>
-                <SignInButton />
+                <SignInButton>
+                  <Button variant="ghost" className="hover:bg-transparent">
+                    Sign In
+                  </Button>
+                </SignInButton>
+
                 <SignUpButton>
                   <Button>Sign Up</Button>
                 </SignUpButton>
@@ -68,7 +68,8 @@ export default function Header() {
                     Submit Project
                   </Link>
                 </Button>
-                <UserButton />
+
+                <CustomUserButton />
               </SignedIn>
             </Suspense>
           </div>

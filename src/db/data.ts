@@ -132,7 +132,7 @@ export const allProducts = [
     createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
     approvedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
     status: "pending" as const,
-    submittedBy: "kulkarni.ankita09@gmail.com",
+    submittedBy: "developer@example.com",
     voteCount: 340,
   },
 ];
