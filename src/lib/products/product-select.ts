@@ -1,9 +1,9 @@
 import { desc, eq } from "drizzle-orm";
 import { cacheLife } from "next/cache";
 import { db } from "@/db";
-import { products } from "@/db/schema";
+import { type Product, products } from "@/db/schema";
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (): Promise<Product[]> => {
   "use cache";
   cacheLife("max");
 
@@ -16,14 +16,14 @@ export const getAllProducts = async () => {
 };
 
 // cache at page level
-export const getFeaturedProducts = async () => {
+export const getFeaturedProducts = async (): Promise<Product[]> => {
   const allProducts = await getAllProducts();
 
   return allProducts.filter((product) => product.status === "approved");
 };
 
 // no caching for this function
-export const getRecentlyLaunchedProducts = async () => {
+export const getRecentlyLaunchedProducts = async (): Promise<Product[]> => {
   const productsData = await db
     .select()
     .from(products)
@@ -38,4 +38,16 @@ export const getRecentlyLaunchedProducts = async () => {
       product.createdAt &&
       new Date(product.createdAt.toISOString()) >= oneWeekAgo,
   );
+};
+
+export const getProductBySlug = async (
+  slug: string,
+): Promise<Product | null> => {
+  const product = await db
+    .select()
+    .from(products)
+    .where(eq(products.slug, slug))
+    .limit(1);
+
+  return product?.[0] ?? null;
 };

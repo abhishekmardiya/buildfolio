@@ -19,6 +19,7 @@ export const VotingButtons = ({
 }) => {
   const [optimisticVoteCount, setOptimisticVoteCount] = useOptimistic(
     initialVoteCount,
+    // Math.max is used to ensure the vote count never goes below 0
     (currentCount, change: number) => Math.max(0, currentCount + change),
   );
   const [isPending, startTransition] = useTransition();
