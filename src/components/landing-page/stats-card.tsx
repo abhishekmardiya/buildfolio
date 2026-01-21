@@ -1,7 +1,7 @@
 import type { LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-export default function StatsCard({
+export const StatsCard = ({
   icon: Icon,
   value,
   label,
@@ -11,7 +11,7 @@ export default function StatsCard({
   value: string;
   label: string;
   hasBorder?: boolean;
-}) {
+}) => {
   return (
     <div className={cn("space-y-2", hasBorder && "border-x border-border/50")}>
       <div className="flex items-center justify-center gap-2">
@@ -21,4 +21,4 @@ export default function StatsCard({
       <p className="text-sm text-muted-foreground">{label}</p>
     </div>
   );
-}
+};

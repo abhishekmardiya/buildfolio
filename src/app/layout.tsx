@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Footer from "@/components/common/footer";
-import Header from "@/components/common/header";
+import { Toaster } from "sonner";
+import { Footer } from "@/components/common/footer";
+import { Header } from "@/components/common/header";
 import { siteInfo } from "@/lib/utils";
 
 const outfit = Outfit({ subsets: ["latin"] });
@@ -24,6 +25,7 @@ export default function RootLayout({
         <body className={`${outfit.className} antialiased`}>
           <Header />
           {children}
+          <Toaster />
           <Footer />
         </body>
       </html>

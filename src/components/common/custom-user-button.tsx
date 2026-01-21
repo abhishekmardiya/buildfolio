@@ -5,7 +5,7 @@ import { Building2Icon, BuildingIcon } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
 
-export default function CustomUserButton() {
+export const CustomUserButton = () => {
   return (
     <UserButton>
       <UserButton.UserProfilePage
@@ -44,4 +44,4 @@ export default function CustomUserButton() {
       </UserButton.UserProfilePage>
     </UserButton>
   );
-}
+};

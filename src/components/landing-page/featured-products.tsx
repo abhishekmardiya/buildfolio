@@ -1,13 +1,16 @@
 "use cache";
 
 import { ArrowUpRightIcon, StarIcon } from "lucide-react";
+import { cacheLife } from "next/cache";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getFeaturedProducts } from "@/lib/products/product-select";
-import SectionHeader from "../common/section-header";
-import ProductCard from "../products/product-card";
+import { SectionHeader } from "../common/section-header";
+import { ProductCard } from "../products/product-card";
 
-export default async function FeaturedProducts() {
+export const FeaturedProducts = async () => {
+  cacheLife("max");
+
   const featuredProducts = await getFeaturedProducts();
 
   return (
@@ -33,4 +36,4 @@ export default async function FeaturedProducts() {
       </div>
     </section>
   );
-}
+};

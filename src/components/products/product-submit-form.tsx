@@ -2,7 +2,7 @@
 
 import { Loader2Icon, SparklesIcon } from "lucide-react";
 import { useActionState } from "react";
-import { addProductAction } from "@/lib/products/product-action";
+import { addProductAction } from "@/lib/products/product-actions";
 import { cn } from "@/lib/utils";
 import type { FormState } from "@/types";
 import { FormField } from "../forms/form-field";
@@ -14,7 +14,7 @@ const initialState: FormState = {
   message: "",
 };
 
-export default function ProductSubmitForm() {
+export const ProductSubmitForm = () => {
   // https://react.dev/reference/react/useActionState#display-information-after-submitting-a-form
   const [state, formAction, isPending] = useActionState(
     addProductAction,
@@ -124,4 +124,4 @@ export default function ProductSubmitForm() {
       </Button>
     </form>
   );
-}
+};

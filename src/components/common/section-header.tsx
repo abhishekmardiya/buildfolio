@@ -1,6 +1,6 @@
 import type { LucideIcon } from "lucide-react";
 
-export default function SectionHeader({
+export const SectionHeader = ({
   title,
   icon: Icon,
   description,
@@ -8,7 +8,7 @@ export default function SectionHeader({
   title: string;
   icon: LucideIcon;
   description: string;
-}) {
+}) => {
   return (
     <div className="">
       <div className="flex items-center gap-2 mb-3">
@@ -18,4 +18,4 @@ export default function SectionHeader({
       <p className="text-muted-foreground text-lg">{description}</p>
     </div>
   );
-}
+};

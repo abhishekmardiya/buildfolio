@@ -9,7 +9,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { siteInfo } from "@/lib/utils";
-import StatsCard from "./stats-card";
+import { StatsCard } from "./stats-card";
 
 const LiveBadge = () => {
   return (
@@ -47,7 +47,7 @@ const statsData = [
   },
 ];
 
-export default function HeroSection() {
+export const HeroSection = () => {
   return (
     <section className="relative overflow-hidden bg-linear-to-b from-background via-background to-muted/20">
       <div className="wrapper">
@@ -87,4 +87,4 @@ export default function HeroSection() {
       </div>
     </section>
   );
-}
+};

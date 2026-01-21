@@ -9,7 +9,7 @@ import {
 import Link from "next/link";
 import { Suspense } from "react";
 import { Button } from "../ui/button";
-import CustomUserButton from "./custom-user-button";
+import { CustomUserButton } from "./custom-user-button";
 
 const Logo = () => {
   return (
@@ -24,7 +24,7 @@ const Logo = () => {
   );
 };
 
-export default function Header() {
+export const Header = () => {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
       <div className="wrapper px-12">
@@ -77,4 +77,4 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};

@@ -1,12 +1,12 @@
 import { CalendarIcon, RocketIcon } from "lucide-react";
 import { Suspense } from "react";
 import { getRecentlyLaunchedProducts } from "@/lib/products/product-select";
-import EmptyState from "../common/empty-state";
-import SectionHeader from "../common/section-header";
-import RecentlyLaunchedProductsShimmer from "../common/shimmer/recently-launched-products-shimmer";
-import ProductCard from "../products/product-card";
+import { EmptyState } from "../common/empty-state";
+import { SectionHeader } from "../common/section-header";
+import { RecentlyLaunchedProductsShimmer } from "../common/shimmer/recently-launched-products-shimmer";
+import { ProductCard } from "../products/product-card";
 
-export default function RecentlyLaunchedProducts() {
+export const RecentlyLaunchedProducts = () => {
   return (
     <section className="py-20">
       <div className="wrapper space-y-12">
@@ -22,9 +22,9 @@ export default function RecentlyLaunchedProducts() {
       </div>
     </section>
   );
-}
+};
 
-async function RecentlyLaunchedProductsContent() {
+const RecentlyLaunchedProductsContent = async () => {
   const recentlyLaunchedProducts = await getRecentlyLaunchedProducts();
 
   return (
@@ -43,4 +43,4 @@ async function RecentlyLaunchedProductsContent() {
       )}
     </>
   );
-}
+};

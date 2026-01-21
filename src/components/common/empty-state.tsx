@@ -1,12 +1,12 @@
 import type { LucideIcon } from "lucide-react";
 
-export default function EmptyState({
+export const EmptyState = ({
   message,
   icon: Icon,
 }: {
   message: string;
   icon?: LucideIcon;
-}) {
+}) => {
   return (
     <div className="empty-state">
       {Icon && (
@@ -15,4 +15,4 @@ export default function EmptyState({
       <p className="text-lg text-muted-foreground">{message}</p>
     </div>
   );
-}
+};

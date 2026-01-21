@@ -1,6 +1,8 @@
 "use server";
 
 import { auth, currentUser } from "@clerk/nextjs/server";
+import { eq, sql } from "drizzle-orm";
+import { revalidatePath } from "next/cache";
 import z from "zod";
 import { db } from "@/db";
 import { products } from "@/db/schema";
@@ -11,7 +13,11 @@ export const addProductAction = async (
   // we don't need the previous state, so we use _prevState to suppress the unused variable warning
   _prevState: FormState,
   formData: FormData,
-) => {
+): Promise<{
+  success: boolean;
+  message: string;
+  errors: Record<string, string[]> | undefined;
+}> => {
   // 1. check if the user is authenticated
   // 2. extract the data
   // 3. validate it
@@ -92,6 +98,67 @@ export const addProductAction = async (
       success: false,
       errors: undefined,
       message: "Failed to submit product",
+    };
+  }
+};
+
+export const upvoteAndDownvoteProductAction = async ({
+  productId,
+  voteType,
+}: {
+  productId: number;
+  voteType: "upvote" | "downvote";
+}): Promise<{ success: boolean; message: string }> => {
+  try {
+    const { userId, orgId } = await auth();
+
+    if (!userId) {
+      console.log("User not signed in");
+      return {
+        success: false,
+        message: "You must be signed in to upvote or downvote a product",
+      };
+    }
+
+    if (!orgId) {
+      console.log("User not a member of an organization");
+      return {
+        success: false,
+        message:
+          "You must be a member of an organization to upvote or downvote a product",
+      };
+    }
+
+    await db
+      .update(products)
+      // increments or decrements vote_count by 1 while ensuring the value never drops below 0
+      // "sql" is used to execute raw SQL queries
+      .set({
+        voteCount:
+          voteType === "upvote"
+            ? sql`GREATEST(0, vote_count + 1)`
+            : sql`GREATEST(0, vote_count - 1)`,
+      })
+      .where(eq(products.id, productId));
+
+    // to purge our cache and show the latest data
+    revalidatePath("/");
+
+    return {
+      success: true,
+      message:
+        voteType === "upvote"
+          ? "Product upvoted successfully"
+          : "Product downvoted successfully",
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      success: false,
+      message:
+        voteType === "upvote"
+          ? "Failed to upvote product"
+          : "Failed to downvote product",
     };
   }
 };

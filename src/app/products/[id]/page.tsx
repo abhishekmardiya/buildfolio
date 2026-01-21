@@ -1,5 +1,3 @@
-"use cache";
-
 import { getFeaturedProducts } from "@/lib/products/product-select";
 
 export const generateStaticParams = async () => {
