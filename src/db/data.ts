@@ -1,3 +1,5 @@
+import "server-only";
+
 // All products data - matches schema.ts structure
 export const allProducts = [
   {
