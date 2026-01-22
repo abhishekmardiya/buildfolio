@@ -14,12 +14,12 @@ import { VotingButtons } from "@/components/products/voting-buttons";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  getFeaturedProducts,
+  getApprovedProducts,
   getProductBySlug,
 } from "@/lib/products/product-select";
 
 export async function generateStaticParams() {
-  const products = await getFeaturedProducts();
+  const products = await getApprovedProducts();
 
   const staticParams = products.map((product) => ({
     slug: product.slug.toString(),

@@ -4,14 +4,14 @@ import { ArrowUpRightIcon, StarIcon } from "lucide-react";
 import { cacheLife } from "next/cache";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { getFeaturedProducts } from "@/lib/products/product-select";
+import { getApprovedProducts } from "@/lib/products/product-select";
 import { SectionHeader } from "../common/section-header";
 import { ProductCard } from "../products/product-card";
 
 export const FeaturedProducts = async () => {
   cacheLife("max");
 
-  const featuredProducts = await getFeaturedProducts();
+  const featuredProducts = await getApprovedProducts();
 
   return (
     <section className="py-20 bg-muted/20">

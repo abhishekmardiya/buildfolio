@@ -2,7 +2,7 @@
 
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { eq, sql } from "drizzle-orm";
-import { revalidatePath } from "next/cache";
+import { revalidateTag } from "next/cache";
 import z from "zod";
 import { db } from "@/db";
 import { products } from "@/db/schema";
@@ -142,7 +142,7 @@ export const upvoteAndDownvoteProductAction = async ({
       .where(eq(products.id, productId));
 
     // to purge our cache and show the latest data
-    revalidatePath("/");
+    revalidateTag("/explore", "max");
 
     return {
       success: true,

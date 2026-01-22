@@ -1,13 +1,14 @@
 import "server-only";
 
 import { desc, eq } from "drizzle-orm";
-import { cacheLife } from "next/cache";
+import { cacheLife, cacheTag } from "next/cache";
 import { db } from "@/db";
 import { type Product, products } from "@/db/schema";
 
 export const getAllProducts = async (): Promise<Product[]> => {
   "use cache";
   cacheLife("max");
+  cacheTag("products");
 
   const productsData = await db
     .select()
@@ -18,13 +19,17 @@ export const getAllProducts = async (): Promise<Product[]> => {
 };
 
 // cache at page level
-export const getFeaturedProducts = async (): Promise<Product[]> => {
+export const getApprovedProducts = async (): Promise<Product[]> => {
+  "use cache";
+  cacheLife("max");
+  cacheTag("products");
+
   const allProducts = await getAllProducts();
 
   return allProducts.filter((product) => product.status === "approved");
 };
 
-// no caching for this function
+// no caching for this function as we are using new Date()
 export const getRecentlyLaunchedProducts = async (): Promise<Product[]> => {
   const productsData = await db
     .select()
