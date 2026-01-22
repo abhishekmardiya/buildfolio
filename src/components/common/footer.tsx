@@ -13,8 +13,8 @@ export const Footer = () => {
               <div className="size-8 rounded-lg bg-primary flex items-center justify-center">
                 <SparkleIcon className="size-4 text-primary-foreground" />
               </div>
-              <span className="text-xl font-bold">
-                i<span className="text-primary">Built</span>This
+              <span className="text-xl font-bold text-primary">
+                {siteInfo.name}
               </span>
             </Link>
             <p className="text-sm text-muted-foreground max-w-xs">

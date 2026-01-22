@@ -2,7 +2,7 @@
 
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { eq, sql } from "drizzle-orm";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import z from "zod";
 import { db } from "@/db";
 import { products } from "@/db/schema";
@@ -113,7 +113,6 @@ export const upvoteAndDownvoteProductAction = async ({
     const { userId, orgId } = await auth();
 
     if (!userId) {
-      console.log("User not signed in");
       return {
         success: false,
         message: "You must be signed in to upvote or downvote a product",
@@ -121,7 +120,6 @@ export const upvoteAndDownvoteProductAction = async ({
     }
 
     if (!orgId) {
-      console.log("User not a member of an organization");
       return {
         success: false,
         message:
@@ -142,7 +140,8 @@ export const upvoteAndDownvoteProductAction = async ({
       .where(eq(products.id, productId));
 
     // to purge our cache and show the latest data
-    revalidateTag("/explore", "max");
+    revalidateTag("/products", "max");
+    revalidatePath("/");
 
     return {
       success: true,

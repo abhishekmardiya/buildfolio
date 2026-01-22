@@ -42,6 +42,8 @@ export const VotingButtons = ({
 
       if (!success) {
         toast.error(message);
+
+        setOptimisticVoteCount(initialVoteCount);
       }
     });
   };

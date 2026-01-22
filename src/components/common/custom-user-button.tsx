@@ -36,7 +36,10 @@ export const CustomUserButton = () => {
         <div className="p-4">
           <h2>Admin Panel</h2>
           <Link href="/admin" className="w-full justify-start">
-            <Button size="default" className="w-full justify-start">
+            <Button
+              size="default"
+              className="w-full justify-start mt-2 rounded-md max-w-fit"
+            >
               Go to Admin Panel
             </Button>
           </Link>

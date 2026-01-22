@@ -29,7 +29,7 @@ export const getApprovedProducts = async (): Promise<Product[]> => {
   return allProducts.filter((product) => product.status === "approved");
 };
 
-// no caching for this function as we are using new Date()
+// no caching for this function as we are using Date
 export const getRecentlyLaunchedProducts = async (): Promise<Product[]> => {
   const productsData = await db
     .select()
